@@ -71,59 +71,84 @@ export default {
 
 <style scoped>
 .cadastro-container {
-  display: grid;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   height: 80vh;
-  gap: 40px;
+  gap: 2rem;
 }
 
 .form-container {
-  display: grid;
-  gap: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 300px; /* Limita a largura máxima do contêiner do formulário */
 }
 
 .input-container {
   position: relative;
+  width: 100%;
 }
 
 .input {
   width: 100%;
-  height: 60px;
-  padding-left: 30px;
-  border: 3px solid #17b8be;
+  height: 3rem; /* tamanho relativo */
+  padding-left: 3rem; /* espaço para o ícone */
+  border: 2px solid #17b8be;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 1rem; /* tamanho relativo */
 }
 
 .icon {
   position: absolute;
   top: 50%;
-  left: -50px;
+  left: -20px;
   transform: translateY(-50%);
   color: #ffffff;
   border: none;
   border-radius: 50px;
   background-color: #17b8be;
-  font-size: 60px;
-  padding: 5px;
+  font-size: 2rem; /* tamanho relativo */
+  padding: 0.5rem; /* tamanho relativo */
 }
 
 .buttonLogin-container {
-  display: grid;
-  gap: 50px;
-  justify-items: center;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  width: 100%;
+  max-width: 250px; /* Limita a largura máxima dos botões */
 }
 
 .buttonCadastrar {
-  width: 350px;
-  height: 80px;
+  width: 100%;
+  height: 3rem; /* tamanho relativo */
   background-color: #17b8be;
   color: #000000;
-  font-size: 50px;
+  font-size: 1.5rem; /* tamanho relativo */
   border: none;
   border-radius: 10px;
   cursor: pointer;
 }
+/* Estilos para a modal */
+.el-dialog {
+  max-width: 90%; /* Permite que a modal ocupe até 90% da largura da tela */
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: space-between; /* Espaça os botões uniformemente */
+  gap: 1rem; /* Adiciona um espaço entre os botões */
+}
+
+.el-button {
+  flex: 1; /* Permite que os botões ocupem todo o espaço disponível */
+  margin: 0.5rem; /* Adiciona uma margem ao redor dos botões */
+  font-size: 1rem; /* Ajusta o tamanho da fonte dos botões */
+}
+
+
 </style>

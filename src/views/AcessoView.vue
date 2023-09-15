@@ -1,13 +1,13 @@
 <template>
-  <div class="acesso-container">
-    <div class="button-container">
-      <button class="buttonAdm" @click="acessoAdm">ACESSO ADM</button>
-      <button class="buttonPublico" @click="acessoPublico">
-        ACESSO PÚBLICO
-      </button>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg mb-4" @click="acessoAdm">ACESSO ADM</button>
+      <br>
+      <button class="btn btn-primary btn-lg" @click="acessoPublico">ACESSO PÚBLICO</button>
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -24,37 +24,15 @@ export default {
 </script>
 
 <style scoped>
-.acesso-container {
-  display: grid;
-  height: 80vh;
-  justify-items: center;
-}
 
-.button-container {
-  display: grid;
-  gap: 100px;
-  justify-items: center;
-  align-content: center;
-}
+/* Você pode manter estilos personalizados aqui, mas muitos deles podem ser substituídos pelas classes do Bootstrap */
 
-.buttonAdm {
-  width: 400px;
-  height: 80px;
+.btn-primary {
   background-color: #17b8be;
   color: #000000;
-  font-size: 50px;
   border: none;
   border-radius: 10px;
-  cursor: pointer;
+  max-width: 500px;
 }
-.buttonPublico {
-  width: 500px;
-  height: 80px;
-  background-color: #17b8be;
-  color: #000000;
-  font-size: 50px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
+
 </style>
