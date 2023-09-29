@@ -1,109 +1,139 @@
 <template>
-  <div class="gereciamentoArmario-container">
+  <div class="container mt-4">
+  <div class="row justify-content-center">
     <button
       v-for="armario in armarios"
       :key="armario.id"
-      class="card"
+      class="card col-12 col-sm-6 col-md-4 col-lg-3 m-2"
       @click="goToBox(armario.id)"
     >
       <div class="card-img">
-        <div class="img"><img src="../assets/armarios.png" alt="" /></div>
+        <div class="img"><img src="../assets/armarios.png" alt="" class="img-fluid" /></div>
       </div>
-      <div class="card-text">{{ armario.nome }}</div>
+      <div class="card-text text-center">{{ armario.nome }}</div>
     </button>
-    <el-button
-      class="add"
-      icon="el-icon-plus"
-      @click="showModal = true"
-    ></el-button>
-    <el-button
-      class="delete"
-      icon="el-icon-delete"
-      @click="showModalDelete = true"
-    ></el-button>
-    <el-button
-      class="editar"
-      icon="el-icon-edit"
-      @click="showModalEdit = true"
-    ></el-button>
-    <el-dialog
-      title="Novo Armário"
-      :visible.sync="showModal"
-      width="30%"
-      @close="resetForm"
-    >
-      <el-form ref="armarioForm" :model="novoArmario" label-width="120px">
-        <el-form-item label="Nome do Armário">
-          <el-input v-model="novoArmario.nome"></el-input>
-        </el-form-item>
-      </el-form>
+  </div>
 
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="showModal = false">Cancelar</el-button>
-        <el-button type="primary" @click="criarArmario">Criar</el-button>
-      </div>
-    </el-dialog>
-    <el-dialog
-      title="Editar Armário"
-      :visible.sync="showModalEdit"
-      width="30%"
-      @close="resetEditForm"
-    >
-      <el-form ref="editForm" :model="armarioEdicao" label-width="130px">
-        <el-form-item label="Selecionar Armário">
-          <el-select
-            v-model="armarioSelecionado"
-            placeholder="Selecione um armário"
-          >
-            <el-option
-              v-for="armario in armarios"
-              :key="armario.id"
-              :label="armario.nome"
-              :value="armario.id"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Nome do Armário">
-          <el-input v-model="armarioEdicao.nome"></el-input>
-        </el-form-item>
-      </el-form>
+   <!-- Botões -->
+<div class="button-group">
+  <el-button
+    class="action-button add"
+    icon="el-icon-plus"
+    @click="showModal = true"
+    title="Adicionar Armário" 
+  ></el-button>
+  <el-button
+    class="action-button delete"
+    icon="el-icon-delete"
+    @click="showModalDelete = true"
+    title="Excluir Armário"
+  ></el-button>
+  <el-button
+    class="action-button editar"
+    icon="el-icon-edit"
+    @click="showModalEdit = true"
+    title="Editar Armário"
+  ></el-button>
+</div>
 
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="showModalEdit = false">Cancelar</el-button>
-        <el-button type="primary" @click="confirmarEdicaoArmario"
-          >Confirmar</el-button
-        >
-      </div>
-    </el-dialog>
-    <el-dialog
-      title="Excluir Armário"
-      :visible.sync="showModalDelete"
-      width="30%"
-      @close="resetDeleteForm"
-    >
-      <el-form ref="deleteForm" :model="armarioExclusao" label-width="130px">
-        <el-form-item label="Selecionar Armário">
-          <el-select
-            v-model="armarioSelecionadoExclusao"
-            placeholder="Selecione um armário"
-          >
-            <el-option
-              v-for="armario in armarios"
-              :key="armario.id"
-              :label="armario.nome"
-              :value="armario.id"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
 
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="showModalDelete = false">Cancelar</el-button>
-        <el-button type="danger" @click="confirmarExclusaoArmario"
-          >Excluir</el-button
-        >
+    <el-dialog
+  title="Novo Armário"
+  :visible.sync="showModal"
+  width="400px" 
+  @close="resetForm"
+>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <el-form ref="armarioForm" :model="novoArmario" label-width="130px" >
+          <el-form-item label="Nome do Armário">
+            <el-input v-model="novoArmario.nome"></el-input>
+          </el-form-item>
+        </el-form>
       </div>
-    </el-dialog>
+    </div>
+  </div>
+
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="showModal = false">Cancelar</el-button>
+    <el-button type="primary" @click="criarArmario">Criar</el-button>
+  </div>
+</el-dialog>
+
+
+<el-dialog
+  title="Editar Armário"
+  :visible.sync="showModalEdit"
+  width="400px" 
+  @close="resetEditForm"
+>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <el-form ref="editForm" :model="armarioEdicao" label-width="135px">
+          <el-form-item label="Selecionar Armário">
+            <el-select
+              v-model="armarioSelecionado"
+              placeholder="Selecione um armário"
+            >
+              <el-option
+                v-for="armario in armarios"
+                :key="armario.id"
+                :label="armario.nome"
+                :value="armario.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="Nome do Armário">
+            <el-input v-model="armarioEdicao.nome"></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
+  </div>
+
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="showModalEdit = false">Cancelar</el-button>
+    <el-button type="primary" @click="confirmarEdicaoArmario">Confirmar</el-button>
+  </div>
+</el-dialog>
+
+
+<el-dialog
+  title="Excluir Armário"
+  :visible.sync="showModalDelete"
+  width="400px" 
+  @close="resetDeleteForm"
+>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <el-form ref="deleteForm" :model="armarioExclusao" label-width="135px">
+          <el-form-item label="Selecionar Armário">
+            <el-select
+              v-model="armarioSelecionadoExclusao"
+              placeholder="Selecione um armário"
+            >
+              <el-option
+                v-for="armario in armarios"
+                :key="armario.id"
+                :label="armario.nome"
+                :value="armario.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
+  </div>
+
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="showModalDelete = false">Cancelar</el-button>
+    <el-button type="danger" @click="confirmarExclusaoArmario">Excluir</el-button>
+  </div>
+</el-dialog>
+
   </div>
 </template>
 
@@ -203,29 +233,35 @@ export default {
 };
 </script>
 
-<style>
-.gereciamentoArmario-container {
-  display: grid;
-  grid-template-columns: 20vw 20vw 20vw;
-  margin-top: 20px;
-  justify-content: center;
-  align-content: center;
-  gap: 5vw;
-}
+<style scoped>
 .card {
-  height: 40vh;
-  border-radius: 10px;
-  width: 20vw;
+  height: auto;
+  border-radius: 15px;
+  padding: 20px;
   background: #17b8be;
   border: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s; /* Adiciona transição suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+  margin: 10px; /* Espaçamento entre cards */
 }
+
+.card:hover {
+  transform: translateY(-10px); /* Efeito de levantar o card ao passar o mouse */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais profunda no hover */
+}
+
 .img img {
-  height: 150px;
+  width: 120px;
+  height: auto;
+  max-width: 100%;
+  border-radius: 10px; /* Arredonda os cantos da imagem */
 }
+
+
 .img {
   background: #fff;
   display: flex;
@@ -234,47 +270,81 @@ export default {
   width: 220px;
   height: 220px;
   border-radius: 200px;
+  margin: 0 auto; /* Centraliza horizontalmente */
 }
+
 .card-text {
-  margin-top: 50px;
-  font-size: 3rem;
+  margin-top: 20px;
+  font-size: 1.2rem;
   width: 100%;
   border-top: 2px solid black;
+  font-weight: bold;
+  color: black;
+  padding-top: 10px; /* Espaçamento entre a linha e o texto */
 }
-.add {
+
+.add, .delete, .editar {
   font-size: 30px;
+  position: fixed;
+  height: 70px;
+  width: 70px;
+  border-radius: 100px;
+  border: none;
+  color: #fff;
+  bottom: 10px;
+}
+
+.add {
+  right: 10px;
+  background-color: rgb(14, 231, 14);
+}
+
+.delete {
+  right: 200px;
+  background-color: rgb(231, 14, 61);
+}
+
+.editar {
+  right: 100px;
+  background-color: #0382f8;
+}
+
+/* Estilos para os botões */
+.button-group {
   position: fixed;
   bottom: 10px;
   right: 10px;
+  display: flex;
+  gap: 10px; /* Espaçamento entre os botões */
+}
+
+.action-button {
+  font-size: 30px;
   height: 70px;
   width: 70px;
   border-radius: 100px;
   border: none;
+  transition: transform 0.2s; /* Efeito de transição */
+}
+
+.action-button:hover {
+  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+}
+
+.add {
   background-color: rgb(14, 231, 14);
   color: #fff;
 }
+
 .delete {
-  font-size: 30px;
-  position: fixed;
-  bottom: 10px;
-  right: 200px;
-  height: 70px;
-  width: 70px;
-  border-radius: 100px;
-  border: none;
   background-color: rgb(231, 14, 61);
   color: #fff;
 }
+
 .editar {
-  font-size: 30px;
-  position: fixed;
-  bottom: 10px;
-  right: 100px;
-  height: 70px;
-  width: 70px;
-  border-radius: 100px;
-  border: none;
   background-color: #0382f8;
   color: #fff;
 }
+
+
 </style>

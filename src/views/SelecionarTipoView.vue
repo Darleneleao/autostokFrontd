@@ -25,36 +25,36 @@ export default {
 
 <style scoped>
 .selecionarTipo-container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 80vh;
-  justify-items: center;
+  padding: 1rem; /* Adiciona um pouco de espaço ao redor */
 }
 
 .button-container {
-  display: grid;
-  gap: 100px;
-  justify-items: center;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* tamanho relativo */
+  align-items: center;
+  width: 100%;
+  max-width: 400px; /* Limita a largura máxima do contêiner do botão */
 }
 
-.buttonPesquisa {
-  width: 400px;
-  height: 80px;
+.buttonPesquisa, .buttonGerenciamento {
+  width: 100%;
+  height: 3rem; /* tamanho relativo */
   background-color: #17b8be;
   color: #000000;
-  font-size: 50px;
+  font-size: 1.5rem; /* tamanho relativo */
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.buttonGerenciamento {
-  width: 500px;
-  height: 80px;
-  background-color: #17b8be;
-  color: #000000;
-  font-size: 50px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
+
 </style>

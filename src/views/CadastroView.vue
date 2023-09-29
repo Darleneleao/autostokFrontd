@@ -35,18 +35,23 @@
       </button>
     </div>
 
-    <!-- Modal de confirmação de cadastro -->
-    <el-dialog
-      title="Confirmação de Cadastro"
-      :visible.sync="showModal"
-      width="30%"
-    >
-      <p>Você tem certeza que deseja cadastrar?</p>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="showModal = false">Cancelar</el-button>
-        <el-button type="primary" @click="cadastrar">Confirmar</el-button>
-      </div>
-    </el-dialog>
+<!-- Modal de confirmação de cadastro -->
+<el-dialog
+  title="Confirmação de Cadastro"
+  :visible.sync="showModal"
+  width="400px"  
+>
+  <p>Você tem certeza que deseja cadastrar?</p>
+  <div slot="footer" class="dialog-footer row"> <!-- Use a classe 'row' do Bootstrap -->
+    <div class="col-6"> <!-- Use as colunas do Bootstrap para dividir o espaço -->
+      <el-button @click="showModal = false" class="w-100">Cancelar</el-button> <!-- w-100 faz o botão ocupar toda a largura da coluna -->
+    </div>
+    <div class="col-6">
+      <el-button type="primary" @click="cadastrar" class="w-100">Confirmar</el-button>
+    </div>
+  </div>
+</el-dialog>
+
   </div>
 </template>
 
@@ -133,22 +138,5 @@ export default {
   border-radius: 10px;
   cursor: pointer;
 }
-/* Estilos para a modal */
-.el-dialog {
-  max-width: 90%; /* Permite que a modal ocupe até 90% da largura da tela */
-}
-
-.dialog-footer {
-  display: flex;
-  justify-content: space-between; /* Espaça os botões uniformemente */
-  gap: 1rem; /* Adiciona um espaço entre os botões */
-}
-
-.el-button {
-  flex: 1; /* Permite que os botões ocupem todo o espaço disponível */
-  margin: 0.5rem; /* Adiciona uma margem ao redor dos botões */
-  font-size: 1rem; /* Ajusta o tamanho da fonte dos botões */
-}
-
 
 </style>

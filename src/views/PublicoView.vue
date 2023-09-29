@@ -1,34 +1,35 @@
 <template>
-  <div class="grid-container">
+  <div class="grid-container ">
     <div class="item">
-      <label for="select1">Selecione o armário</label>
-      <select id="select1" class="select-field" v-model="armario">
+      
+      <select id="select1" class="select-field" v-model="armario" >
+        <option value="0" disabled selected>Selecione um armário</option> <!-- Placeholder -->
         <option value="1">Opção 1</option>
         <option value="2">Opção 2</option>
         <option value="3">Opção 3</option>
       </select>
     </div>
     <div class="item">
-      <label for="search">Buscar</label>
-      <div class="search-input">
-        <input
-          type="text"
-          id="search"
-          placeholder="Pesquisar item"
-          class="search-field"
-          v-model="busca"
-        />
-        <i class="search-icon el-icon-search" @click="botaoBusca"></i>
-      </div>
-    </div>
-    <div class="item">
-      <label for="select2">Selecione a box</label>
       <select id="select2" class="select-field" v-model="box">
+        <option value="0" disabled selected>Selecione uma box</option> <!-- Placeholder -->
         <option value="1">Opção A</option>
         <option value="2">Opção B</option>
         <option value="3">Opção C</option>
       </select>
     </div>
+    <div class="item">
+      <div class="search-input row"> <!-- Adicione a classe 'row' do Bootstrap -->
+        <input
+          type="text"
+          id="search"
+          placeholder="Pesquisar item"
+          class="search-field form-control col" 
+          v-model="busca"
+        />
+        <i class="search-icon el-icon-search col-auto" @click="botaoBusca"></i> <!-- Adicione a classe 'col-auto' do Bootstrap -->
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -38,8 +39,8 @@ export default {
   components: {},
   data() {
     return {
-      armario: 1,
-      box: 1,
+      armario: 0,
+      box: 0,
       busca: "",
     };
   },
@@ -51,54 +52,46 @@ export default {
 
 <style scoped>
 .grid-container {
-  display: grid;
-  grid-template-columns: 20vw 20vw; /* Duas colunas */
-  grid-template-rows: auto auto; /* Duas linhas */
-  grid-gap: 20px; /* Espaçamento entre os elementos */
-  justify-items: center; /* Alinhar horizontalmente ao centro */
-  align-items: center; /* Alinhar verticalmente ao centro */
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens se ajustem em várias linhas conforme necessário */
   justify-content: center;
-  margin-top: 10px;
+  align-content:start ;
+  gap:1rem; /* Espaçamento entre os itens */
+  margin-top: 1rem;
 }
 
 .item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 30px;
+  font-size: 1.5rem; /* tamanho relativo */
   font-weight: bold;
+  width: 100%; /* Ocupa toda a largura disponível */
+  max-width: 300px; /* Limita a largura máxima do item */
 }
 
-.select-field {
-  border: 3px solid #17b8be;
+.select-field, .search-field {
+  border: 2px solid #17b8be;
+  background-color: #ffffff;
+  color: black;
   border-radius: 10px;
-  padding: 10px;
-  width: 300px;
-  font-size: 20px;
-}
-
-.search-container {
-  grid-column: 2; /* Posicionar na segunda coluna */
-  grid-row: 2; /* Posicionar na segunda linha */
-  text-align: right; /* Alinhar o conteúdo à direita */
-}
-
-.search-field {
-  border: 3px solid #17b8be;
-  border-radius: 10px;
-  padding: 10px;
-  width: 300px;
-  font-size: 20px;
+  padding: 0.5rem; /* tamanho relativo */
+  font-size: 1rem; /* tamanho relativo */
 }
 
 .search-icon {
-  font-size: 30px;
+  font-size: 1.5rem; /* tamanho relativo */
   color: #17b8be;
-
-  margin-left: 5px;
+  padding: 0.5rem; /* Adiciona um pouco de padding para alinhar o ícone verticalmente */
+  cursor: pointer; /* Faz o ícone parecer clicável */
+  font-weight: bold;
 }
 
 label {
   text-align: center;
+  margin-bottom: 0.5rem; /* tamanho relativo */
 }
+
+
+
 </style>
