@@ -43,7 +43,7 @@ const routes = [
     component: GerenciamentoArmarioView
   },
   {
-    path: '/gerenciamentoBox',
+    path: '/gerenciamentoBox/:id',
     name: 'gerenciamentoBox',
     component: GerenciamentoBoxView
   },

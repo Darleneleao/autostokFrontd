@@ -10,7 +10,7 @@
       <div class="card-img">
         <div class="img"><img src="../assets/armarios.png" alt="" class="img-fluid" /></div>
       </div>
-      <div class="card-text text-center">{{ armario.nome }}</div>
+      <div class="card-text text-center">{{ armario.descricao }}</div>
     </button>
   </div>
 
@@ -47,8 +47,8 @@
     <div class="row">
       <div class="col-md-12">
         <el-form ref="armarioForm" :model="novoArmario" label-width="130px" >
-          <el-form-item label="Nome do Armário">
-            <el-input v-model="novoArmario.nome"></el-input>
+          <el-form-item label="descricao do Armário">
+            <el-input v-model="novoArmario.descricao"></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -80,13 +80,13 @@
               <el-option
                 v-for="armario in armarios"
                 :key="armario.id"
-                :label="armario.nome"
+                :label="armario.descricao"
                 :value="armario.id"
               ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="Nome do Armário">
-            <el-input v-model="armarioEdicao.nome"></el-input>
+          <el-form-item label="descricao do Armário">
+            <el-input v-model="armarioEdicao.descricao"></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -118,7 +118,7 @@
               <el-option
                 v-for="armario in armarios"
                 :key="armario.id"
-                :label="armario.nome"
+                :label="armario.descricao"
                 :value="armario.id"
               ></el-option>
             </el-select>
@@ -138,37 +138,22 @@
 </template>
 
 <script>
+import armarioService from '../services/armarioService'
 export default {
   name: "GerenciamentoArmario",
   components: {},
   data() {
     return {
       armarios: [
-        {
-          id: 1,
-          nome: "Armario1",
-        },
-        {
-          id: 2,
-          nome: "Armario2",
-        },
-        {
-          id: 3,
-          nome: "Armario3",
-        },
-        {
-          id: 4,
-          nome: "Armario3",
-        },
       ],
       showModal: false,
       showModalEdit: false,
       showModalDelete: false,
       novoArmario: {
-        nome: "",
+        descricao: "",
       },
       armarioEdicao: {
-        nome: "",
+        descricao: "",
       },
       armarioSelecionado: null,
       armarioExclusao: {
@@ -177,24 +162,24 @@ export default {
       armarioSelecionadoExclusao: null,
     };
   },
+  created () {
+    this.getArmarios()
+  },
   methods: {
     goToBox(idArmario) {
       console.log(idArmario);
-      this.$router.push("gerenciamentoBox");
+      this.$router.push(`gerenciamentoBox/${idArmario}`);
     },
     resetForm() {
       this.$refs.armarioForm.resetFields();
     },
     criarArmario() {
-      // Lógica para criar um novo armário usando this.novoArmario.nome
-      // Exemplo:
-      const novoId = this.armarios.length + 1;
-      const novoArmario = {
-        id: novoId,
-        nome: this.novoArmario.nome,
-      };
-      this.armarios.push(novoArmario);
+      armarioService.cadastraArmario( { descricao: this.novoArmario.descricao } ).then( resp =>{
+        this.getArmarios()
+        console.log(resp);
+      })
       this.showModal = false;
+      this.getArmarios()
       this.resetForm();
     },
     resetEditForm() {
@@ -206,9 +191,7 @@ export default {
       );
       console.log(this.armarios);
       if (this.armarioSelecionado) {
-        // Lógica para confirmar a edição do armário usando this.armarioEdicao.nome
-        // Exemplo:
-        this.armarioSelecionado.nome = this.armarioEdicao.nome;
+        this.armarioSelecionado.descricao = this.armarioEdicao.descricao;
         this.showModalEdit = false;
         this.resetEditForm();
       }
@@ -229,6 +212,9 @@ export default {
         }
       }
     },
+    async getArmarios () {
+      this.armarios = await armarioService.getArmarios()
+    }
   },
 };
 </script>

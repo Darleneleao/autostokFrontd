@@ -10,7 +10,7 @@
       <div class="card-img">
         <div class="img"><img src="../assets/caixa.png" alt=""  class="img-fluid"/></div>
       </div>
-      <div class="card-text text-center">{{ box.nome }}</div>
+      <div class="card-text text-center">{{ box.descricao }}</div>
     </button>
   </div>
     
@@ -46,8 +46,8 @@
     <div class="row">
       <div class="col-md-12">
         <el-form ref="boxForm" :model="novoBox" label-width="130px" >
-          <el-form-item label="Nome do Box">
-            <el-input v-model="novoBox.nome"></el-input>
+          <el-form-item label="descricao do Box">
+            <el-input v-model="novoBox.descricao"></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -79,13 +79,13 @@
               <el-option
                 v-for="box in boxes"
                 :key="box.id"
-                :label="box.nome"
+                :label="box.descricao"
                 :value="box.id"
               ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="Nome do Box">
-            <el-input v-model="boxEdicao.nome"></el-input>
+          <el-form-item label="descricao do Box">
+            <el-input v-model="boxEdicao.descricao"></el-input>
           </el-form-item>
         </el-form>
       </div>
@@ -117,7 +117,7 @@
               <el-option
                 v-for="box in boxes"
                 :key="box.id"
-                :label="box.nome"
+                :label="box.descricao"
                 :value="box.id"
               ></el-option>
             </el-select>
@@ -136,69 +136,22 @@
 </template>
 
 <script>
+import boxServices from '@/services/boxService';
+
 export default {
   name: "GerenciamentoBox",
   components: {},
   data() {
     return {
-      boxes: [
-        {
-          id: 1,
-          nome: "Box 1",
-        },
-        {
-          id: 2,
-          nome: "Box 2",
-        },
-        {
-          id: 3,
-          nome: "Box 3",
-        },
-        {
-          id: 4,
-          nome: "Box 4",
-        },
-        {
-          id: 5,
-          nome: "Box 5",
-        },
-        {
-          id: 6,
-          nome: "Box Baixa 1",
-        },
-        {
-          id: 7,
-          nome: "Box Baixa 2",
-        },
-        {
-          id: 8,
-          nome: "Box Baixa 3",
-        },
-        {
-          id: 9,
-          nome: "Box divisoria 1",
-        },
-        {
-          id: 10,
-          nome: "Caixa Papelão 1",
-        },
-        {
-          id: 11,
-          nome: "Caixa Papelão 2",
-        },
-        {
-          id: 12,
-          nome: "Embrapi",
-        },
-      ],
+      boxes: [],
       showModal: false,
       showModalEdit: false,
       showModalDelete: false,
       novoBox: {
-        nome: "",
+        descricao: "",
       },
       boxEdicao: {
-        nome: "",
+        descricao: "",
       },
       boxSelecionado: null,
       boxExclusao: {
@@ -206,6 +159,9 @@ export default {
       },
       boxSelecionadoExclusao: null,
     };
+  },
+  created () {
+    this.getBoxes()
   },
   methods: {
     goToList(idBox) {
@@ -216,14 +172,10 @@ export default {
       this.$refs.boxForm.resetFields();
     },
     criarBox() {
-      // Lógica para criar um novo box usando this.novoBox.nome
-      // Exemplo:
-      const novoId = this.boxes.length + 1;
-      const novoBox = {
-        id: novoId,
-        nome: this.novoBox.nome,
-      };
-      this.boxes.push(novoBox);
+      boxServices.cadastraBox({ descricao: this.novoBox.descricao, armarioId: this.$route.params.id} ).then(resp =>{
+        this. getBoxes()
+        console.log(resp);
+      })
       this.showModal = false;
       this.resetForm();
     },
@@ -236,9 +188,9 @@ export default {
       );
       console.log(this.boxes);
       if (this.boxSelecionado) {
-        // Lógica para confirmar a edição do box usando this.boxEdicao.nome
+        // Lógica para confirmar a edição do box usando this.boxEdicao.descricao
         // Exemplo:
-        this.boxSelecionado.nome = this.boxEdicao.nome;
+        this.boxSelecionado.descricao = this.boxEdicao.descricao;
         this.showModalEdit = false;
         this.resetEditForm();
       }
@@ -259,6 +211,9 @@ export default {
         }
       }
     },
+    async getBoxes(){
+      this.boxes = await boxServices.getboxes(this.$route.params.id)
+    }
   },
 };
 </script>
