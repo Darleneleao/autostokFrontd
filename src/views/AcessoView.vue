@@ -1,9 +1,9 @@
 <template>
   <div class="d-flex justify-content-center align-items-center">
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg mb-4" @click="acessoAdm">ACESSO ADM</button>
+    <div class="buttonAcesso-container">
+      <button class="botaoADM" @click="acessoAdm">ACESSO ADM</button>
       <br>
-      <button class="btn btn-primary btn-lg" @click="acessoPublico">ACESSO PÚBLICO</button>
+      <button class="botaoPublico" @click="acessoPublico">ACESSO PÚBLICO</button>
     </div>
   </div>
 </template>
@@ -27,12 +27,23 @@ export default {
 
 /* Você pode manter estilos personalizados aqui, mas muitos deles podem ser substituídos pelas classes do Bootstrap */
 
-.btn-primary {
+.buttonAcesso-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  max-width: 250px; /* Limita a largura máxima dos botões */
+}
+.botaoADM, .botaoPublico {
+  width: 100%;
+  height: 3rem; /* tamanho relativo */
   background-color: #17b8be;
   color: #000000;
+  font-size: 1.5rem; /* tamanho relativo */
   border: none;
   border-radius: 10px;
-  max-width: 500px;
+  cursor: pointer;
 }
 
 </style>

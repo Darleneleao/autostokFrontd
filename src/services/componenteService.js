@@ -12,6 +12,10 @@ const componenteServices = {
     },
     deleteComponente: async (id) =>{
         api.delete(`/componentes/${id}`)
+    },
+    pesquisaComponente: async (data) => {
+        const retorno = await api.post(`/componentes/pesquisa`, data)
+        return retorno.data
     }
 }
 export default componenteServices

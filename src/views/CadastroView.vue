@@ -14,7 +14,7 @@
         <input
           type="text"
           class="input"
-          v-model="usuario"
+          v-model="login"
           placeholder="Seu e-mail"
         />
         <i class="icon el-icon-message"></i>
@@ -56,19 +56,26 @@
 </template>
 
 <script>
+import autheticationService from '@/services/authenticationService';
+
 export default {
   name: "CadastroView",
   data() {
     return {
       usuario: "",
+      login: "",
       senha: "",
       showModal: false, // Variável para controlar a exibição da modal
     };
   },
   methods: {
-    cadastrar() {
-      // Lógica de cadastro aqui
-      this.$router.push("login");
+    async cadastrar() {
+      await autheticationService.register({
+        nome: this.usuario,
+        login: this.login,
+        password: this.senha,
+      });
+      this.$router.push("GerenciamentoUsuario");
     },
   },
 };

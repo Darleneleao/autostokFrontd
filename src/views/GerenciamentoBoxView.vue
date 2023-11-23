@@ -188,9 +188,10 @@ export default {
       );
       console.log(this.boxes);
       if (this.boxSelecionado) {
-        // Lógica para confirmar a edição do box usando this.boxEdicao.descricao
-        // Exemplo:
-        this.boxSelecionado.descricao = this.boxEdicao.descricao;
+        boxServices.updateBox(this.boxSelecionado.id, { id: this.boxSelecionado.id, descricao: this.boxEdicao.descricao, armarioId: this.$route.params.id  } ).then( resp =>{
+          this.getBoxes()
+          console.log(resp);
+        })
         this.showModalEdit = false;
         this.resetEditForm();
       }
@@ -200,15 +201,13 @@ export default {
     },
     confirmarExclusaoBox() {
       if (this.boxSelecionadoExclusao) {
-        // Lógica para confirmar a exclusão do box
-        const index = this.boxes.findIndex(
-          (box) => box.id === this.boxSelecionadoExclusao
-        );
-        if (index !== -1) {
-          this.boxes.splice(index, 1);
+        boxServices.deleteBox(this.boxSelecionadoExclusao).then( resp =>{
+          this.getBoxes()
+          console.log(resp);
+        })
           this.showModalDelete = false;
+          this.getBoxes()
           this.resetDeleteForm();
-        }
       }
     },
     async getBoxes(){

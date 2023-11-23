@@ -154,13 +154,18 @@ export default {
   },
   methods: {
     excluirItem(item) {
+      this.itemExclusao = { ...item };
       console.log("Excluir item:", item);
       this.exclusaoModalVisible = true;
     },
     confirmarExclusaoItem() {
       console.log("Excluir item:", this.itemExclusao);
-      // Lógica para excluir o item da tabela
+      componenteServices.deleteComponente(this.itemExclusao.id).then(resp=>{
+        this.getComponentes(this.idCaixa)
+        console.log(resp);
+      })
       this.exclusaoModalVisible = false;
+      this.getComponentes(this.idCaixa)
     },
     editarItem(item) {
       console.log("Editar item:", item);
@@ -173,14 +178,19 @@ export default {
     },
     confirmarAdicaoItem() {
       componenteServices.cadastraComponente(this.novoItem ).then(resp=>{
-        componenteServices.getComponente(this.idCaixa)
+        this.getComponentes(this.idCaixa)
         console.log(resp);
       })
       this.adicaoModalVisible = false;
+      this.getComponentes(this.idCaixa)
     },
     confirmarEdicaoItem() {
-      // Lógica para confirmar a edição do item
+      componenteServices.updateComponente(this.itemEdicao.id, this.itemEdicao).then(resp=>{
+        this.getComponentes(this.idCaixa)
+        console.log(resp);
+      })
       this.edicaoModalVisible = false;
+      this.getComponentes(this.idCaixa)
     },
     vizualizarItem(item) {
       this.itemVisualizacao = { ...item };

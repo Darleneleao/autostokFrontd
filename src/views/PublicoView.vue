@@ -1,39 +1,37 @@
 <template>
-  <div class="grid-container ">
-    <div class="item">
-      
-      <select id="select1" class="select-field" v-model="armario" >
-        <option value="0" disabled selected>Selecione um armário</option> <!-- Placeholder -->
-        <option value="1">Opção 1</option>
-        <option value="2">Opção 2</option>
-        <option value="3">Opção 3</option>
-      </select>
-    </div>
-    <div class="item">
-      <select id="select2" class="select-field" v-model="box">
-        <option value="0" disabled selected>Selecione uma box</option> <!-- Placeholder -->
-        <option value="1">Opção A</option>
-        <option value="2">Opção B</option>
-        <option value="3">Opção C</option>
-      </select>
-    </div>
-    <div class="item">
-      <div class="search-input row"> <!-- Adicione a classe 'row' do Bootstrap -->
-        <input
-          type="text"
-          id="search"
-          placeholder="Pesquisar item"
-          class="search-field form-control col" 
-          v-model="busca"
-        />
-        <i class="search-icon el-icon-search col-auto" @click="botaoBusca"></i> <!-- Adicione a classe 'col-auto' do Bootstrap -->
+  <div>
+    <div class="grid-container">
+      <div class="item">
+        <div class="search-input row">
+          <!-- Adicione a classe 'row' do Bootstrap -->
+          <input
+            type="text"
+            id="search"
+            placeholder="Pesquisar item"
+            class="search-field form-control col"
+            v-model="busca"
+          />
+          <i
+            class="search-icon el-icon-search col-auto"
+            @click="botaoBusca"
+          ></i>
+          <!-- Adicione a classe 'col-auto' do Bootstrap -->
+        </div>
       </div>
     </div>
+    <el-table :data="retorno" v-if="retorno.length > 0" style="width: 100%">
+        <el-table-column prop="armario" label="Ármario"></el-table-column>
+        <el-table-column prop="caixa" label="Caixa"></el-table-column>
+        <el-table-column prop="nome" label="Nome"></el-table-column>
+        <el-table-column prop="quantidade" label="Quantidade"></el-table-column>
+        <el-table-column prop="descricao" label="Descrição"></el-table-column>
 
+      </el-table>
   </div>
 </template>
 
 <script>
+import componenteServices from "@/services/componenteService";
 export default {
   name: "AcessoView",
   components: {},
@@ -42,10 +40,15 @@ export default {
       armario: 0,
       box: 0,
       busca: "",
+      retorno: [],
     };
   },
   methods: {
-    botaoBusca() {},
+    async botaoBusca() {
+      this.retorno = await componenteServices.pesquisaComponente({
+        nome: this.busca,
+      });
+    },
   },
 };
 </script>
@@ -55,8 +58,8 @@ export default {
   display: flex;
   flex-wrap: wrap; /* Permite que os itens se ajustem em várias linhas conforme necessário */
   justify-content: center;
-  align-content:start ;
-  gap:1rem; /* Espaçamento entre os itens */
+  align-content: start;
+  gap: 1rem; /* Espaçamento entre os itens */
   margin-top: 1rem;
 }
 
@@ -66,17 +69,22 @@ export default {
   align-items: center;
   font-size: 1.5rem; /* tamanho relativo */
   font-weight: bold;
-  width: 100%; /* Ocupa toda a largura disponível */
-  max-width: 300px; /* Limita a largura máxima do item */
+  width: 50%; /* Ocupa toda a largura disponível */
 }
+.search-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Ocupa toda a largura disponível */}
 
-.select-field, .search-field {
+.search-field {
   border: 2px solid #17b8be;
   background-color: #ffffff;
   color: black;
   border-radius: 10px;
   padding: 0.5rem; /* tamanho relativo */
   font-size: 1rem; /* tamanho relativo */
+  width: 100%; /* Ocupa toda a largura disponível */
 }
 
 .search-icon {
@@ -92,6 +100,9 @@ label {
   margin-bottom: 0.5rem; /* tamanho relativo */
 }
 
+.el-table {
+  margin: 1rem 1rem; /* Ajuste conforme necessário */
 
 
+}
 </style>

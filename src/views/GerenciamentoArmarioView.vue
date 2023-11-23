@@ -179,37 +179,32 @@ export default {
         console.log(resp);
       })
       this.showModal = false;
-      this.getArmarios()
       this.resetForm();
     },
     resetEditForm() {
       this.$refs.editForm.resetFields();
     },
     confirmarEdicaoArmario() {
-      this.armarioSelecionado = this.armarios.find(
-        (a) => (a.id = this.armarioSelecionado)
-      );
-      console.log(this.armarios);
-      if (this.armarioSelecionado) {
-        this.armarioSelecionado.descricao = this.armarioEdicao.descricao;
+      armarioService.updateArmario(this.armarioSelecionado, { id: this.armarioSelecionado, descricao: this.armarioEdicao.descricao } ).then( resp =>{
+        this.getArmarios()
+        console.log(resp);
+      })
         this.showModalEdit = false;
+        this.getArmarios()
         this.resetEditForm();
-      }
     },
     resetDeleteForm() {
       this.$refs.deleteForm.resetFields();
     },
     confirmarExclusaoArmario() {
       if (this.armarioSelecionadoExclusao) {
-        // Lógica para confirmar a exclusão do armário
-        const index = this.armarios.findIndex(
-          (armario) => armario.id === this.armarioSelecionadoExclusao
-        );
-        if (index !== -1) {
-          this.armarios.splice(index, 1);
+        armarioService.deleteArmario(this.armarioSelecionadoExclusao).then( resp =>{
+          this.getArmarios()
+          console.log(resp);
+        })
           this.showModalDelete = false;
+          this.getArmarios()
           this.resetDeleteForm();
-        }
       }
     },
     async getArmarios () {

@@ -19,31 +19,41 @@
         />
         <i class="icon el-icon-lock"></i>
       </div>
+      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
     <div class="buttonLogin-container">
       <button class="buttonLogin" @click="login">LOGIN</button>
-      <button class="buttonCadastrar" @click="cadastrar">CADASTRAR</button>
     </div>
   </div>
 </template>
 
 <script>
+import autheticationService from "../services/authenticationService";
 export default {
   name: "LoginView",
   data() {
     return {
       usuario: "",
       senha: "",
+      errorMessage: "",
     };
   },
   methods: {
-    login() {
-      this.$router.push("selecionarTipo");
+    async login() {
+      try {
+        const response = await autheticationService.login({ login: this.usuario, password: this.senha });
+        console.log(response);
+        this.$router.push("/selecionarTipo");
+        location.reload();
+      } catch (error) {
+        console.log(error);
+        this.errorMessage = "Usuário ou senha inválidos.";
+        
+      }
     },
-    cadastrar() {
-      this.$router.push("cadastro");
-    },
+    
   },
+  
 };
 </script>
 
@@ -95,13 +105,13 @@ export default {
 .buttonLogin-container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: center;
   width: 100%;
   max-width: 250px; /* Limita a largura máxima dos botões */
 }
 
-.buttonLogin, .buttonCadastrar {
+.buttonLogin {
   width: 100%;
   height: 3rem; /* tamanho relativo */
   background-color: #17b8be;
@@ -110,6 +120,11 @@ export default {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  font-size: 1rem; /* tamanho relativo */
 }
 
 </style>

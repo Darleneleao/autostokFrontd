@@ -2,9 +2,8 @@
   <div class="selecionarTipo-container">
     <div class="button-container">
       <button class="buttonPesquisa" @click="pesquisa">PESQUISA</button>
-      <button class="buttonGerenciamento" @click="gerenciamento">
-        GERENCIAMENTO
-      </button>
+      <button class="buttonGerenciamento" @click="gerenciamento">GERENCIAMENTO</button>
+      <button class="buttonGerenciamento" @click="gerenciamentoUsuario">GERENCIAMENTO DE USUÁRIO</button>
     </div>
   </div>
 </template>
@@ -18,6 +17,9 @@ export default {
     },
     gerenciamento() {
       this.$router.push("gerenciamentoArmario");
+    },
+    gerenciamentoUsuario() {
+      this.$router.push("gerenciamentoUsuario");
     },
   },
 };
@@ -42,7 +44,7 @@ export default {
   max-width: 400px; /* Limita a largura máxima do contêiner do botão */
 }
 
-.buttonPesquisa, .buttonGerenciamento {
+.buttonPesquisa, .buttonGerenciamento, .buttonGerenciamentoUsuario {
   width: 100%;
   height: 3rem; /* tamanho relativo */
   background-color: #17b8be;
