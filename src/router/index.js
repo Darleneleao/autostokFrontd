@@ -92,6 +92,10 @@ router.beforeEach((to, from, next) => {
     next('/selecionarTipo')
   } else if (to.path === '/gerenciamentoUsuario' && !isAuthenticated) {
     next('/')
+  } else if (to.path.startsWith('/gerenciamentoBox/') && !isAuthenticated) {
+    next('/')
+  } else if (to.path.startsWith('/lista/') && !isAuthenticated) {
+    next('/')
   } else {
     next()
   }

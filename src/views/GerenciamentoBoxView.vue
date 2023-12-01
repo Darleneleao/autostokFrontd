@@ -45,7 +45,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <el-form ref="boxForm" :model="novoBox" label-width="130px" >
+        <el-form ref="boxForm" :model="novoBox"  >
           <el-form-item label="descricao do Box">
             <el-input v-model="novoBox.descricao"></el-input>
           </el-form-item>
@@ -70,7 +70,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <el-form ref="editForm" :model="boxEdicao" label-width="135px">
+        <el-form ref="editForm" :model="boxEdicao" >
           <el-form-item label="Selecionar Box">
             <el-select
               v-model="boxSelecionado"
@@ -108,7 +108,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <el-form ref="deleteForm" :model="boxExclusao" label-width="135px">
+        <el-form ref="deleteForm" :model="boxExclusao" >
           <el-form-item label="Selecionar Box">
             <el-select
               v-model="boxSelecionadoExclusao"
@@ -193,6 +193,7 @@ export default {
           console.log(resp);
         })
         this.showModalEdit = false;
+        this.getBoxes()
         this.resetEditForm();
       }
     },
@@ -330,4 +331,10 @@ export default {
   color: #fff;
 }
 
+.label-width {
+  width: 100%;
+  max-width: 300px; /* Define a largura máxima da label */
+  margin: 0 auto; /* Centraliza horizontalmente */
+}
 </style>
+

@@ -46,7 +46,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <el-form ref="armarioForm" :model="novoArmario" label-width="130px" >
+        <el-form ref="armarioForm" :model="novoArmario"  >
           <el-form-item label="descricao do Armário">
             <el-input v-model="novoArmario.descricao"></el-input>
           </el-form-item>
@@ -71,7 +71,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <el-form ref="editForm" :model="armarioEdicao" label-width="135px">
+        <el-form ref="editForm" :model="armarioEdicao" >
           <el-form-item label="Selecionar Armário">
             <el-select
               v-model="armarioSelecionado"
@@ -109,7 +109,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <el-form ref="deleteForm" :model="armarioExclusao" label-width="135px">
+        <el-form ref="deleteForm" :model="armarioExclusao">
           <el-form-item label="Selecionar Armário">
             <el-select
               v-model="armarioSelecionadoExclusao"
@@ -327,5 +327,12 @@ export default {
   color: #fff;
 }
 
+.label-width {
+  width: 100%;
+  max-width: 300px; /* Define a largura máxima da label */
+  margin: 0 auto; /* Centraliza horizontalmente */
+}
+
 
 </style>
+
