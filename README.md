@@ -15,30 +15,6 @@ Este projeto é a interface front-end do sistema **Autostok**, desenvolvido para
 - **Frontend:** HTML, CSS, JavaScript
 - **Frameworks/Bibliotecas:** Vue.js
 - **Consumo de API:** Integração com o back-end para operações CRUD.
-
-## 🚀 Como Executar o Projeto
-
-1. **Clone o repositório:**
-
-   ```bash
-   git clone https://github.com/Darleneleao/autostokFrontd.git
-
-2. **Instale as dependências:**
-
-   ```bash
-   npm install
-   
-3. **Configure as variáveis de ambiente:**
-
-- Crie um arquivo .env na raiz do projeto.
-- Adicione as variáveis necessárias, como a URL da API do back-end.
-
-4. **Inicie a aplicação:**
-
-   ```bash
-   npm start
-
-A aplicação estará disponível em http://localhost:8080.
    
 ## 📷 Capturas de Tela
 
