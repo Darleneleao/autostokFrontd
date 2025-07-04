@@ -15,6 +15,69 @@ Este projeto é a interface front-end do sistema **Autostok**, desenvolvido para
 - **Frontend:** HTML, CSS, JavaScript
 - **Frameworks/Bibliotecas:** Vue.js
 - **Consumo de API:** Integração com o back-end para operações CRUD.
+
+## 🚀 Como Executar o Projeto
+
+Siga os passos abaixo para rodar o projeto localmente.
+
+### ✅ Pré-requisitos
+
+Antes de começar, você precisa ter instalado na sua máquina:
+
+- [Node.js (versão recomendada: 18+)](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+- [Yarn](https://classic.yarnpkg.com/lang/en/) ou [npm](https://www.npmjs.com/)
+
+### 🔧 Instalação
+
+1. Clone este repositório:
+
+```bash
+git clone https://github.com/Darleneleao/autostokFrontd.git
+```
+
+2. Acesse o diretório do projeto:
+
+```bash
+cd autostokFrontd
+```
+
+3. Instale as dependências:
+
+Usando **npm**:
+
+```bash
+npm install
+```
+
+Ou usando **yarn**:
+
+```bash
+yarn install
+```
+
+### ▶️ Executando o Projeto
+
+Para iniciar o projeto em modo de desenvolvimento:
+
+Usando **npm**:
+
+```bash
+npm start
+```
+
+Ou usando **yarn**:
+
+```bash
+yarn start
+```
+
+A aplicação estará disponível em:
+
+```
+http://localhost:3000
+```
+
    
 ## 📷 Capturas de Tela
 
