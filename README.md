@@ -75,7 +75,7 @@ yarn start
 A aplicação estará disponível em:
 
 ```
-http://localhost:3000
+http://localhost:8000
 ```
 
    
